@@ -1,0 +1,31 @@
+name: 'dwh'
+version: '1.0.0'
+profile: 'dwh'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  dwh:
+    staging:
+      +materialized: view
+
+    intermediate:
+        +materialized: view  
+
+    facts:
+        +materialized: table
+
+    dimensions:
+        +materialized: table        
+      
+vars:
+  start_date: '2005-01-01'

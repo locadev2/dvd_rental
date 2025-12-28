@@ -1,0 +1,18 @@
+version: 2
+
+sources:
+  - name: dvdrental
+    database: dvdrental
+    schema: public
+    tables:
+      - name: rental
+      - name: film
+      - name: customer
+      - name: payment
+      - name: store
+      - name: staff
+      - name: inventory
+      - name: address
+      - name: city
+      - name: country
+      - name: language
