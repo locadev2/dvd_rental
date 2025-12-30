@@ -35,6 +35,7 @@ select
     c.is_active,
     c.create_date,
 
+    c.address_id,
     a.address,
     a.district,
     a.postal_code,
@@ -46,7 +47,7 @@ select
         a.last_update,
         ci.last_update,
         co.last_update
-    ) as updated_at
+    ) as last_update
 
 from customer c
 left join addresses a
