@@ -2,7 +2,7 @@
 
 {{
     config(
-      target_schema='dwh',
+      target_schema='staging',
       unique_key='customer_id',
       strategy='check',
       check_cols=[

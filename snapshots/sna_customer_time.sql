@@ -2,7 +2,7 @@
 
 {{
     config(
-      target_schema = 'dwh',
+      target_schema = 'staging',
       unique_key = 'customer_id',
       strategy = 'timestamp',
       updated_at = 'last_update'
