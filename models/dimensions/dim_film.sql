@@ -13,7 +13,7 @@ film as (
 )
 
 select
-    film_id as film_key,
+    film_id,
     title,
     release_year,
     rental_duration,

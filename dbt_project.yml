@@ -34,3 +34,4 @@ models:
 vars:
   start_date: '2005-01-01'
   end_date: '9999-12-31'
+  end_date_key: 99991231

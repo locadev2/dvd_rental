@@ -1,0 +1,6 @@
+{
+"settings": {
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "python.defaultInterpreterPath": "~/workspace/dbt/.venv/bin/python3"
+}}
+
