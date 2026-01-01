@@ -1,4 +1,16 @@
 with 
+rental as (
+    select * 
+    from {{ ref('stg_rental') }}
+),
+inventory as (
+    select * 
+    from {{ ref('stg_inventory') }}
+),
+store as (
+    select * 
+    from {{ ref('stg_store') }}
+),
 calendar as (
     select * 
     from {{ref('dim_calendar')}}    
@@ -7,17 +19,9 @@ customer as (
     select * 
     from {{ ref('dim_customer') }}
 ),
-rental as (
-    select * 
-    from {{ ref('stg_rental') }}
-),
 payment as (
     select * 
-    from {{ ref('stg_payment') }}
-),
-inventory as (
-    select * 
-    from {{ ref('stg_inventory') }}
+    from {{ ref('mid_payment') }}
 ),
 vars as (
     select {{var("end_date_key")}}::int as "end_date_key"

@@ -1,9 +1,9 @@
 version: 2
 
 sources:
-  - name: dvdrental
+  - name: landing
     database: dwh
-    schema: public
+    schema: landing
     tables:
       - name: rental
       - name: film

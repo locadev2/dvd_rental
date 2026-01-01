@@ -4,6 +4,7 @@ select
     min(date_key) as mi,
     max(date_key) as ma
 from main.dim_calendar
+where date_key < 99991231
 union all
 
 select
@@ -11,3 +12,4 @@ select
     min(rental_date_key) as mi,
     max(return_date_key) as ma
 from main.fact_sales
+where return_date_key < 99991231

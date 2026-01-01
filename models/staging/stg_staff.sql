@@ -1,16 +1,14 @@
 with source as (
 
     select * 
-    from {{ source('landing', 'language') }}
+    from {{ source('landing', 'staff') }}
 
 ),
 
 final as (
 
-    select
-        language_id, "name"
+    select *
     from source
-
 )
 
 select * from final

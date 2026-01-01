@@ -2,7 +2,7 @@ SELECT
     'rental' as TableName,
     count(*) as N
 FROM
-    public.rental
+    landing.rental
 UNION ALL
 SELECT
     'facts',
