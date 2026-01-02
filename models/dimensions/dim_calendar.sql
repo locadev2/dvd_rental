@@ -1,8 +1,8 @@
-with dates as (
-
+with 
+dates as (
     select generate_series(
-        '2005-01-01'::date,
-        '2008-01-01'::date,
+        '{{var("start_date")}}'::date,
+        '{{var("end_date")}}'::date,
         interval '1 day'
     ) as date_day
     union all

@@ -24,7 +24,7 @@ payment as (
     from {{ ref('mid_payment') }}
 ),
 vars as (
-    select {{var("end_date_key")}}::int as "end_date_key"
+    select {{var("default_date_key")}}::int as "default_date_key"
 ),
 fact as (
 
@@ -34,7 +34,7 @@ fact as (
         cs.customer_key,
         i.store_id,
         cd.date_key as rental_date_key,
-        coalesce(cr.date_key, end_date_key) as return_date_key,
+        coalesce(cr.date_key, default_date_key) as return_date_key,
         --p.payment_date,
         pm.amount
     from rental r

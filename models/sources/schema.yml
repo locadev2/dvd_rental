@@ -1,9 +1,9 @@
 version: 2
 
 sources:
-  - name: landing
+  - name: rental
     database: dwh
-    schema: landing
+    schema: source
     tables:
       - name: rental
       - name: film

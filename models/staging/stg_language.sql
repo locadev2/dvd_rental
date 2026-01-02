@@ -1,7 +1,7 @@
 with source as (
 
     select * 
-    from {{ source('landing', 'language') }}
+    from {{ source('rental', 'language') }}
 
 ),
 

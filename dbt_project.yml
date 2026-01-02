@@ -21,7 +21,7 @@ models:
 
     intermediate:
       +schema: staging
-      +materialized: view
+      +materialized: table
 
     facts:
       +schema: main
@@ -29,9 +29,19 @@ models:
 
     dimensions:
       +schema: main
-      +materialized: table        
+      +materialized: table
 
+    marts:
+      +schema: marts
+      +materialized: table
+    
+    metrics:
+      +schema: marts
+      +materialized: table
+ 
 vars:
   start_date: '2005-01-01'
-  end_date: '9999-12-31'
-  end_date_key: 99991231
+  end_date: '2008-01-01'
+  default_date: '9999-12-31'
+  default_date_key: 99991231
+

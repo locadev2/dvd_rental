@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: mart_sales
+    description: Semantic layer model providing sales metrics and dimensions
+    columns:
+      - name: rental_id
+        description: Unique identifier for rental transaction
+      - name: customer_key
+        description: Surrogate key for customer dimension
+      - name: customer_id
+        description: Business key for customer
+      - name: customer_name
+        description: Customer full name
+      - name: film_id
+        description: Film identifier
+      - name: store_id
+        description: Store identifier
+      - name: rental_date_key
+        description: Date key for rental date
+      - name: return_date_key
+        description: Date key for return date
+      - name: rental_amount
+        description: Rental payment amount
+
+  - name: mart_customer
+    description: Semantic layer providing customer analytics
+    columns:
+      - name: customer_key
+        description: Surrogate key for customer
+      - name: customer_id
+        description: Business key for customer
+      - name: first_name
+        description: Customer first name
+      - name: last_name
+        description: Customer last name
+      - name: email
+        description: Customer email address
+      - name: city
+        description: Customer city
+      - name: country
+        description: Customer country
+      - name: is_active
+        description: Whether customer account is active
+      - name: total_rentals
+        description: Total number of rentals by customer
+      - name: total_spent
+        description: Total amount spent by customer
