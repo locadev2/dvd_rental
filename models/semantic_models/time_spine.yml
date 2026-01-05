@@ -1,0 +1,9 @@
+models:
+  - name: time_spine
+    description: Daily time spine table for MetricFlow. One row per day from 2005 to 2008, filtered to 4 years back and 1 year forward from current date.
+    time_spine:
+      standard_granularity_column: date_day
+    columns:
+      - name: date_day
+        description: Date column at daily granularity
+        granularity: day

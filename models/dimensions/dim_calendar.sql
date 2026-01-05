@@ -1,18 +1,7 @@
-with 
-dates as (
-    select generate_series(
-        '{{var("start_date")}}'::date,
-        '{{var("end_date")}}'::date,
-        interval '1 day'
-    ) as date_day
-    union all
-    select '9999-12-31'::date
-)
 select
-    to_char(date_day, 'YYYYMMDD')::integer as date_key,
-    date_day,
-    extract(year from date_day) as year,
-    extract(month from date_day) as month,
-    extract(day from date_day) as day,
-    extract(dow from date_day) as day_of_week
-from dates
+  d.date_day,
+  extract(dow from d.date_day)     as day_of_week,
+  extract(month from d.date_day)   as date_month,
+  extract(year from d.date_day)    as date_year,
+  to_char(d.date_day, 'YYYY-MM')   as year_month
+from {{ ref('time_spine') }} d

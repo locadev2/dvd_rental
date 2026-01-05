@@ -1,0 +1,37 @@
+metrics:
+  - name: total_revenue
+    description: Sum of total revenue from rentals.
+    type: simple
+    label: Total Revenue
+    type_params:
+      measure: total_revenue
+
+  - name: total_rentals
+    description: Total count of rental transactions.
+    type: simple
+    label: Total Rentals
+    type_params:
+      measure: rental_count
+
+  - name: average_rental_value
+    description: Average value per rental transaction.
+    type: ratio
+    label: Average Rental Value
+    type_params:
+      numerator: total_revenue
+      denominator: total_rentals
+
+  - name: distinct_customers
+    description: Count of distinct customers.
+    type: simple
+    label: Distinct Customers
+    type_params:
+      measure: distinct_customers
+
+  - name: revenue_per_customer
+    description: Average revenue generated per distinct customer.
+    type: ratio
+    label: Revenue per Customer
+    type_params:
+      numerator: total_revenue
+      denominator: distinct_customers

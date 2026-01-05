@@ -1,0 +1,147 @@
+semantic_models:
+  - name: sales
+    defaults:
+      agg_time_dimension: rental_date
+    description: |
+      Sales fact table. This table's grain is one row per rental transaction.
+    model: ref('fact_sales')
+    
+    # Entities - ID columns that serve as join keys
+    entities:
+      - name: rental_id
+        type: primary
+        expr: rental_id
+      - name: film
+        type: foreign
+        expr: film_id
+      - name: customer
+        type: foreign
+        expr: customer_key
+      - name: store
+        type: foreign
+        expr: store_id
+    
+    # Dimensions - for grouping and filtering
+    dimensions:
+      - name: rental_date
+        type: time
+        type_params:
+          time_granularity: day
+        expr: rental_date_key
+      - name: return_date
+        type: time
+        type_params:
+          time_granularity: day
+        expr: return_date_key
+    
+    # Measures - aggregations on columns
+    measures:
+      - name: total_revenue
+        description: The total revenue from all rentals
+        agg: sum
+        expr: amount
+      - name: rental_count
+        description: Total number of rentals
+        expr: rental_id
+        agg: count
+      # - name: avg_rental_amount
+      #   description: Average rental amount per transaction
+      #   agg: ratio
+      #   expr: amount
+      - name: distinct_customers
+        description: Distinct count of customers who made rentals
+        agg: count_distinct
+        expr: customer_key
+      - name: distinct_films
+        description: Distinct count of films rented
+        agg: count_distinct
+        expr: film_id
+
+  - name: customer
+    description: Customer dimension
+    model: ref('dim_customer')
+    entities:
+      - name: customer
+        type: primary
+        expr: customer_key
+      - name: customer_natural
+        type: unique
+        expr: customer_id
+    dimensions:
+      - name: first_name
+        type: categorical
+      - name: last_name
+        type: categorical
+      - name: email
+        type: categorical
+      - name: is_active
+        type: categorical
+      - name: create_date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: city
+        type: categorical
+      - name: country
+        type: categorical
+      - name: is_current
+        type: categorical
+
+  - name: film
+    description: Film dimension
+    model: ref('dim_film')
+    entities:
+      - name: film
+        type: primary
+        expr: film_id
+    dimensions:
+      - name: title
+        type: categorical
+      - name: release_year
+        type: categorical
+      - name: rental_duration
+        type: categorical
+      - name: rental_rate
+        type: categorical
+      - name: length
+        type: categorical
+      - name: rating
+        type: categorical
+      - name: language_name
+        type: categorical
+
+  - name: store
+    description: Store dimension
+    model: ref('dim_store')
+    entities:
+      - name: store
+        type: primary
+        expr: store_id
+    dimensions:
+      - name: manager_name
+        type: categorical
+      - name: city
+        type: categorical
+      - name: country
+        type: categorical
+
+  - name: calendar
+    description: Calendar dimension
+    model: ref('dim_calendar')
+    entities:
+      - name: date
+        type: primary
+        expr: date_day
+    dimensions:
+      - name: date_day
+        type: time
+        type_params:
+          time_granularity: day
+      - name: day_of_week
+        type: categorical
+      - name: date_month
+        type: categorical
+      - name: date_year
+        type: categorical
+      - name: year_month
+        type: categorical
