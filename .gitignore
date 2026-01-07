@@ -3,16 +3,10 @@ logs/
 target/
 compiled/
 run/
-
-# Python virtual environments
-venv/
-.env/
-
-# OS generated files
-.DS_Store
-Thumbs.db
-
-# IDE specific files
-.idea/
-.vscode/
 dbt_internal_packages/
+dbt_packages/
+
+# Python and Code
+.venv/
+.vscode/
+

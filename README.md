@@ -6,6 +6,8 @@ Try running the following commands:
 - dbt run
 - dbt test
 
+### Config profiles directory (mf ignore default .dbt folder)
+export DBT_PROFILES_DIR=~/.dbt
 
 ### Resources:
 - Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)

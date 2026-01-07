@@ -16,24 +16,29 @@ clean-targets:
 models:
   dwh:
     staging:
+      +tags: staging
       +schema: staging
       +materialized: view
 
     intermediate:
+      +tags: staging
       +schema: staging
-      +materialized: table
+      +materialized: view
 
     facts:
+      +tags: core
       +schema: main
       +materialized: incremental
 
     dimensions:
+      +tags: core
       +schema: main
       +materialized: table
 
     marts:
+      +tags: serving
       +schema: marts
-      +materialized: table
+      +materialized: table          
     
     # old folder with sql metrics, use MetricFlow instead
     # metrics:
@@ -42,9 +47,16 @@ models:
     #   +materialized: table
 
     semantic_models:
+      +tags: serving
       +enabled: true
-      +schema: marts
+      +schema: main
       +materialized: table
+
+    serving:
+      marts:
+      +tags: serving
+      +schema: serving
+      +materialized: table      
  
 vars:
   start_date: '2005-01-01'

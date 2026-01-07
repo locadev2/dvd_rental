@@ -1,0 +1,81 @@
+version: 2
+
+models:
+  - name: fact_sales
+    description: Sales fact table with rental transactions
+    tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "amount >= 0"
+          config:
+            severity: warn
+    
+    columns:
+      # Primary Key Tests
+      - name: rental_id
+        description: Primary key - unique identifier for each rental transaction
+        tests:
+          - not_null
+          - unique
+      
+      # Foreign Key Tests - Not Null
+      - name: film_id
+        description: Foreign key to dim_film
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_film')
+                field: film_id
+                severity: error
+      
+      - name: customer_key
+        description: Foreign key to dim_customer (surrogate key)
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customer')
+                field: customer_key
+                severity: error
+      
+      - name: store_id
+        description: Foreign key to dim_store
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_store')
+                field: store_id
+                severity: error
+      
+      - name: rental_date_key
+        description: Foreign key to dim_calendar for rental date
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_calendar')
+                field: date_key
+                severity: error
+      
+      - name: return_date_key
+        description: Foreign key to dim_calendar for return date (can reference default date)
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_calendar')
+                field: date_key
+                severity: warn
+      
+      # Business Logic Tests
+      - name: amount
+        description: Rental payment amount
+        tests:
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 1000
+              config:
+                severity: warn

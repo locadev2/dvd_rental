@@ -131,7 +131,7 @@ semantic_models:
     entities:
       - name: date
         type: primary
-        expr: date_day
+        expr: date_key
     dimensions:
       - name: date_day
         type: time

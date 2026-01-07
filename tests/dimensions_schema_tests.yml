@@ -1,0 +1,162 @@
+version: 2
+
+models:
+  # ===============================
+  # dim_customer Tests
+  # ===============================
+  - name: dim_customer
+    description: Customer dimension with SCD Type 2
+    tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "is_current IN (true, false)"
+          config:
+            severity: error
+    
+    columns:
+      - name: customer_key
+        description: Surrogate key for customer dimension
+        tests:
+          - not_null
+          - unique
+      
+      - name: customer_id
+        description: Natural key from source system
+        tests:
+          - not_null
+      
+      - name: first_name
+        tests:
+          - not_null
+      
+      - name: last_name
+        tests:
+          - not_null
+      
+      - name: email
+        tests:
+          - not_null
+      
+      - name: is_current
+        description: Flag indicating current version (1) or historical (0)
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+      
+      - name: valid_from
+        tests:
+          - not_null
+      
+      - name: valid_to
+        tests:
+          - not_null
+
+  # ===============================
+  # dim_film Tests
+  # ===============================
+  - name: dim_film
+    description: Film dimension
+    
+    columns:
+      - name: film_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+      
+      - name: title
+        tests:
+          - not_null
+      
+      - name: rating
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['G', 'PG', 'PG-13', 'R', 'NC-17']
+              config:
+                severity: warn
+      
+      - name: rental_rate
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 100
+              config:
+                severity: warn
+      
+      - name: rental_duration
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                max_value: 30
+              config:
+                severity: warn
+
+  # ===============================
+  # dim_store Tests
+  # ===============================
+  - name: dim_store
+    description: Store dimension
+    
+    columns:
+      - name: store_id
+        description: Primary key
+        tests:
+          - not_null
+          - unique
+      
+      - name: city
+        tests:
+          - not_null
+      
+      - name: country
+        tests:
+          - not_null
+
+  # ===============================
+  # dim_calendar Tests
+  # ===============================
+  - name: dim_calendar
+    description: Calendar dimension
+    
+    columns:
+      - name: date_key
+        description: Primary key (YYYYMMDD format)
+        tests:
+          - not_null
+          - unique
+      
+      - name: date_day
+        tests:
+          - not_null
+          - unique
+      
+      - name: day_of_week
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 6
+              config:
+                severity: error
+      
+      - name: date_month
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                max_value: 12
+              config:
+                severity: error
+      
+      - name: date_year
+        tests:
+          - not_null
