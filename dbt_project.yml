@@ -39,24 +39,18 @@ models:
       +tags: serving
       +schema: marts
       +materialized: table          
-    
-    # old folder with sql metrics, use MetricFlow instead
-    # metrics:
-    #   +enabled: false
-    #   +schema: marts
-    #   +materialized: table
 
     semantic_models:
-      +tags: serving
       +enabled: true
-      +schema: main
-      +materialized: table
-
-    serving:
-      marts:
       +tags: serving
-      +schema: serving
+      +schema: main
       +materialized: table      
+    
+    # folder with sql metrics, use MetricFlow instead
+    metrics:
+      +enabled: false
+      +schema: marts
+      +materialized: table
  
 vars:
   start_date: '2005-01-01'
